@@ -39,10 +39,84 @@ You learn more about CFGs, you can reference the CFG article[http://en.wikipedia
 
 === Defining a Grammar
 
+Defining a grammar is easy.  Create a grammar object, add some nonterminals and then add the productions to those nonterminals.
+
+Here's how the grammar from above is defined:
+
+  grammar = Panini::Grammar.new
+
+  nt_s = grammar.add_nonterminal
+  nt_a = grammar.add_nonterminal
+  nt_b = grammar.add_nonterminal
+
+  n_s.add_production([n_a, n_b])        # S -> AB
+  n_s.add_production([n_a, n_s, n_b])   # S -> ASB
+  n_a.add_production(['a'])             # A -> 'a'
+  n_b.add_production(['b'])             # A -> 'b'
+
 === Derivators
+
+Derivators are objects that take a Panini::Grammar and then apply the rules to generate a sentence.  Creating the sentences
+from the grammar can be tricky, and certain derivation strategies may be better for some grammars.
+Currently, the main derivator is the Panini::DerivationStrategy::RandomDampened derivator.
+
+  derivator = Panini::DerivationStrategy::RandomDampened.new(grammar)
+
+=== Generating a Sentence
+
+To generate a sentence, call the derivator's sentence method like thus:
+
+  derivator.sentence -> ['a', 'a', 'b', 'b']
+
+You will get a new sentence (depending on the grammar) with every call:
+
+  derivator.sentence -> ['a', 'a', 'a', 'a', 'b', 'b', 'b', 'b']
+
 
 == Example
 
+In this example, we create a grammar that generates mathematical expressions.
+
+  # ================
+  # = Nonterminals =
+  # ================
+  expression = grammar.add_nonterminal("EXPR")
+  term = grammar.add_nonterminal("TERM")
+  factor = grammar.add_nonterminal("FACT")
+  identifier = grammar.add_nonterminal("ID")
+  number = grammar.add_nonterminal("NUM")
+
+
+  # =============
+  # = Terminals =
+  # =============
+  expression.add_production([term, '+', term])
+  expression.add_production([term, '-', term])
+  expression.add_production([term])
+
+  term.add_production([factor, '*', term])
+  term.add_production([factor, '/', term])
+  term.add_production([factor])
+
+  factor.add_production([identifier])
+  factor.add_production([number])
+  factor.add_production(['(', expression, ')'])
+
+  ('a'..'z').each do |v|
+    identifier.add_production([v])
+  end
+
+  (0..100).each do |n|
+    number.add_production([n])
+  end
+
+  # ===============================================
+  # = Choose a strategy and create some sentences =
+  # ===============================================
+  deriver = Panini::DerivationStrategy::RandomDampened.new(grammar)
+  10.times do
+    puts "#{deriver.sentence.join(' ')}"
+  end
 
 == Contributing to panini
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
@@ -58,9 +132,10 @@ You learn more about CFGs, you can reference the CFG article[http://en.wikipedia
 === Features
 * Detect invalid grammars
 * Weighted productions.
+* Arbitrary start symbol.
 * Support Enumerator?
 * DSL?
-* Perdon Derivator
+* Purdom Derivator?
 
 === Examples
 * Natural language
@@ -69,7 +144,6 @@ You learn more about CFGs, you can reference the CFG article[http://en.wikipedia
 * Address
 * Tree/Flower (PS?)
 * Simulated user actions
- (An Interpretation of Purdom’s Algorithm for Automatic Generation of Test Cases)
 
 == Copyright
 

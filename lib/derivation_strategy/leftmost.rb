@@ -1,12 +1,3 @@
-# Will round-robin through the productions for each nonterminal.  It is not guarunteed that
-# this will converge, you can't predict the string length, and it does no error checking.
-#
-# The implementation is very naive and runs in something like O(n^2) in the cases where
-# it does converge where n is the eventual length of the string produced.
-#
-# In other words, don't use this! It's  in place because it is simple to and was used
-# for early testing.
-#
 module Panini
   module DerivationStrategy
 
@@ -26,6 +17,14 @@ module Panini
 
     end
 
+    # The Leftmost strategy is a naive strategy for deriving sentences from a grammar.  It
+    # will aways substitute for the leftmost nonterminal first.  If a nonterminal has more
+    # than one production, they will be chosen in a round-robin ordering.
+    #
+    # This implementation is slow and will not work on many grammars.
+    #
+    # In other words, don't use this! It's  in place because it is simple to and was used
+    # for early testing.
     class Leftmost < Base
 
       def initialize(grammar)
@@ -41,7 +40,7 @@ module Panini
       end
       private :build_production_proxies
 
-      # TODO Comment. 
+      # Generates a sentence. 
       def sentence
         derived_sentence, substituted = [@grammar.start], false
         begin
