@@ -6,24 +6,24 @@ Panini is a flexible toolkit that enables you to generate sentences from a conte
 
 Informally, a context-free grammar consists of a set of productions rules where a _nonterminal_ on the right
 hand side of the produces a string of terminals and nonterminals on the right hand side.  Like this:
-<tt>
+
   S -> AB
   A -> a
   B -> b
-</tt>
+
 I the above example, _S_, _A_, and _B_ are all nonterminals.  _a_ and _b_ are terminals.  Furthermore, the nonterminal _S_ is the _start_ _symbol_ for this CFG.  By applying the productions as follows:
-<tt>
+
   S     (start symbol)
   AB    (apply S -> AB)
   aB    (apply A -> a)
   ab    (apply B -> b)
-</tt>
+
 The sentence _ab_ is generated.  In fact, this is the only sentence this grammar can produce!  By adding one additional production to the grammar:
-<tt>
+
   S -> ASB
-</tt>
+
 The grammar may now potentially create an infinite number of sentences.  They will all have the form of _a_<sup>i</sup>_b_<sup>i</sup> where _i_ > 1. Here is one more example derivation:
-<tt>
+
   S      (start symbol)
   ASB    (apply S -> ASB)
   aSB    (apply A -> a)
@@ -32,7 +32,7 @@ The grammar may now potentially create an infinite number of sentences.  They wi
   aaABbb (apply S -> AB)
   aaaBbb (apply A -> a)
   aaabbb (apply B -> b)
-</tt>
+
 You learn more about CFGs, you can reference the CFG article[http://en.wikipedia.org/wiki/Context-free_grammar] on Wikipedia</a>.
 
 == Getting Started With Panini
@@ -54,15 +54,15 @@ You learn more about CFGs, you can reference the CFG article[http://en.wikipedia
 * Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
 
 == To Do
- * Error handling
- ** Detect invalid grammars
+* Error handling
+ * Detect invalid grammars
 * Examples
-** Natural language
-** XML
-** JSON
-** Address
-** Tree/Flower (PS?)
-** Simulated user actions
+ * Natural language
+ * XML
+ * JSON
+ * Address
+ * Tree/Flower (PS?)
+ * Simulated user actions
 * Add a sentence generation strategy that allows the user to specify weights.
 * Support Enumerator?
 * DSL?
