@@ -1,9 +1,50 @@
 = panini
 
-Description goes here.
+Panini is a flexible toolkit that enables you to generate sentences from a context-free grammar, also known as a CFG.
+
+== CFG Background
+
+Informally, a context-free grammar consists of a set of productions rules where a _nonterminal_ on the right
+hand side of the produces a string of terminals and nonterminals on the right hand side.  Like this:
+<tt>
+  S -> AB
+  A -> a
+  B -> b
+</tt>
+I the above example, _S_, _A_, and _B_ are all nonterminals.  _a_ and _b_ are terminals.  Furthermore, the nonterminal _S_ is the _start_ _symbol_ for this CFG.  By applying the productions as follows:
+<tt>
+  S     (start symbol)
+  AB    (apply S -> AB)
+  aB    (apply A -> a)
+  ab    (apply B -> b)
+</tt>
+The sentence _ab_ is generated.  In fact, this is the only sentence this grammar can produce!  By adding one additional production to the grammar:
+<tt>
+  S -> ASB
+</tt>
+The grammar may now potentially create an infinite number of sentences.  They will all have the form of _a_<sup>i</sup>_b_<sup>i</sup> where _i_ > 1. Here is one more example derivation:
+<tt>
+  S      (start symbol)
+  ASB    (apply S -> ASB)
+  aSB    (apply A -> a)
+  aSb    (apply B -> b)
+  aaSbb  (apply S -> ASB)
+  aaABbb (apply S -> AB)
+  aaaBbb (apply A -> a)
+  aaabbb (apply B -> b)
+</tt>
+You learn more about CFGs, you can reference the CFG article[http://en.wikipedia.org/wiki/Context-free_grammar] on Wikipedia</a>.
+
+== Getting Started With Panini
+
+=== Defining a Grammar
+
+=== Derivators
+
+== Example
+
 
 == Contributing to panini
- 
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
 * Fork the project
@@ -13,12 +54,9 @@ Description goes here.
 * Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
 
 == To Do
-
-* Error handling
-** General
-** To detect invalid grammars
+ * Error handling
+ ** Detect invalid grammars
 * Examples
-** Mathematical expressions
 ** Natural language
 ** XML
 ** JSON
@@ -28,6 +66,7 @@ Description goes here.
 * Add a sentence generation strategy that allows the user to specify weights.
 * Support Enumerator?
 * DSL?
+* Perdon Derivator (An Interpretation of Purdom’s Algorithm for Automatic Generation of Test Cases)
 
 == Copyright
 

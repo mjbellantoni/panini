@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "panini"
   gem.homepage = "http://github.com/mjbellantoni/panini"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Create sentences from a context-free grammar (CFG)}
+  gem.description = %Q{Panini allows you to generate sentences from a context-free grammar, also known as a CFG.}
   gem.email = "mjbellantoni@yahoo.com"
   gem.authors = ["mjbellantoni"]
   # dependencies defined in Gemfile
