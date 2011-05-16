@@ -1,4 +1,6 @@
 require "grammar"
+require "hash"
 require "nonterminal"
 require "derivation_strategy/base"
 require "derivation_strategy/leftmost"
+require "derivation_strategy/random_dampened"

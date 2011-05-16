@@ -2,8 +2,11 @@ module Panini
 
   class Nonterminal
 
-    def initialize
+    attr_reader :name
+
+    def initialize(name=nil)
       @productions = []
+      @name = name
     end
 
     def add_production(production)
@@ -14,6 +17,10 @@ module Panini
     
     def productions
       @productions.dup
+    end
+
+    def to_s
+      name.nil? ? super : @name
     end
 
   end
