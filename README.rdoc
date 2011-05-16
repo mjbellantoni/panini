@@ -54,19 +54,22 @@ You learn more about CFGs, you can reference the CFG article[http://en.wikipedia
 * Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
 
 == To Do
-* Error handling
- * Detect invalid grammars
-* Examples
- * Natural language
- * XML
- * JSON
- * Address
- * Tree/Flower (PS?)
- * Simulated user actions
-* Add a sentence generation strategy that allows the user to specify weights.
+
+=== Features
+* Detect invalid grammars
+* Weighted productions.
 * Support Enumerator?
 * DSL?
-* Perdon Derivator (An Interpretation of Purdom’s Algorithm for Automatic Generation of Test Cases)
+* Perdon Derivator
+
+=== Examples
+* Natural language
+* XML
+* JSON
+* Address
+* Tree/Flower (PS?)
+* Simulated user actions
+ (An Interpretation of Purdom’s Algorithm for Automatic Generation of Test Cases)
 
 == Copyright
 
