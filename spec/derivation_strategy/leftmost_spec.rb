@@ -71,20 +71,3 @@ describe "Grammar with the production S -> S | 'a' | 'b'" do
   end
 
 end
-
-
-describe "with the production S -> 'a' | 'b'" do
-
-  before (:each) do
-    @g = Panini::Grammar.new
-    @n = @g.add_nonterminal
-    @n.add_production(['a'])
-    @n.add_production(['b'])
-  end
-
-  it "generates the sentence ['a']" do 
-    d = Panini::DerivationStrategy::Leftmost.new(@g)
-    d.sentence.should == ['a']
-  end
-
-end

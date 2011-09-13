@@ -57,10 +57,23 @@ Here's how the grammar from above is defined:
 === Derivators
 
 Derivators are objects that take a Panini::Grammar and then apply the rules to generate a sentence.  Creating the sentences
-from the grammar can be tricky, and certain derivation strategies may be better for some grammars.
-Currently, the main derivator is the Panini::DerivationStrategy::RandomDampened derivator.
+from the grammar can be tricky, and certain derivation strategies may be better for some grammars.  There are currently two main derivators.
+
+==== Panini::DerivationStrategy::RandomDampened
+
+This strategy creates random sentences given a grammar.  It employs a dampening factor to keep the computation of the sentence from blowing up.
 
   derivator = Panini::DerivationStrategy::RandomDampened.new(grammar)
+
+This will return a different sentence each time it is called.  It may (and probably will) return the same sentence multiple times.
+
+==== Panini::DerivationStrategy::Exhaustive
+
+This strategy is used to exhaustively create all of the sentences that may be created by a grammar.
+
+  derivator = Panini::DerivationStrategy::RandomDampened.new(grammar)
+
+This will return a new sentence with each call.  If there are no additional sentences to be created it will return nil.  The same sentence may be returned multiple times if the grammar can derive the sentence in multiple ways.
 
 === Generating a Sentence
 
@@ -119,6 +132,9 @@ In this example, we create a grammar that generates mathematical expressions.
   end
 
 == Contributing to panini
+
+Contributions to this gem are appreciated!
+
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
 * Fork the project
@@ -133,9 +149,10 @@ In this example, we create a grammar that generates mathematical expressions.
 * Detect invalid grammars
 * Weighted productions.
 * Arbitrary start symbol.
-* Support Enumerator?
-* DSL?
+* Support Enumerator!
+* DSL or string based grammar definitions
 * Purdom Derivator?
+* Actions
 
 === Examples
 * Natural language
