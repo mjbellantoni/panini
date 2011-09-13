@@ -54,6 +54,17 @@ Here's how the grammar from above is defined:
   n_a.add_production(['a'])             # A -> 'a'
   n_b.add_production(['b'])             # A -> 'b'
 
+=== Start Symbols
+
+In order to derive sentences, the grammar needs a start symbol.  Any nonterminal in the grammar can be used as the start symbol.  If a start symbol is not explicitly set, then the first nonterminal added to the grammar is used. 
+
+  grammar = Panini::Grammar.new
+
+  nt_0 = grammar.add_nonterminal
+  nt_1 = grammar.add_nonterminal
+
+  grammar.start = nt_1
+
 === Derivators
 
 Derivators are objects that take a Panini::Grammar and then apply the rules to generate a sentence.  Creating the sentences

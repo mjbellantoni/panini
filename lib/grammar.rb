@@ -8,10 +8,14 @@ module Panini
       @nonterminals = []
     end
 
-    # Returns the grammar's start symbol. This will always be the first
-    # nonterminal added to the grammar.
+    # Returns the grammar's start symbol. This will be the first
+    # nonterminal added to the grammar if it hasn't been specified.
     def start
-      @nonterminals[0]
+      @start ||= @nonterminals[0]
+    end
+
+    def start=(start)
+      @start = start
     end
 
     # Add a nonterminal to the grammar.

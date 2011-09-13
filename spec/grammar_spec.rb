@@ -52,8 +52,19 @@ describe "Grammar#start" do
     end
   end
 
-  it "returns the first nonterminal" do
-    @g.start.should == @nonterminals[0]
+  context "when a start symbol is not specified" do
+    it "returns the first nonterminal" do
+      @g.start.should == @nonterminals[0]
+    end    
+  end
+
+  context "when a start symbol is specified" do
+    before(:each) do
+      @g.start = @nonterminals[1]
+    end
+    it "returns that nonterminal" do
+      @g.start.should == @nonterminals[1]
+    end    
   end
 
 end
