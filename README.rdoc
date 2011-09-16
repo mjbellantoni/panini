@@ -82,9 +82,11 @@ This will return a different sentence each time it is called.  It may (and proba
 
 This strategy is used to exhaustively create all of the sentences that may be created by a grammar.
 
-  derivator = Panini::DerivationStrategy::RandomDampened.new(grammar)
+  derivator = Panini::DerivationStrategy::RandomDampened.new(grammar, length_limit)
 
 This will return a new sentence with each call.  If there are no additional sentences to be created it will return nil.  The same sentence may be returned multiple times if the grammar can derive the sentence in multiple ways.
+
+You can optionally pass a limit for the size of sentences to be generated.
 
 === Generating a Sentence
 

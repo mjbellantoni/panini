@@ -117,3 +117,40 @@ describe "Grammar with the production S -> xAyBz, A -> 'a' | 'aa', B -> 'b' | 'b
   end
 
 end
+
+
+describe "Grammar with the production S -> xAyBz, A -> eps | 'a', B -> eps | 'b', and length limit of 4 " do
+
+  before (:each) do
+    @g = Panini::Grammar.new
+
+    @n_s = @g.add_nonterminal
+    @n_a = @g.add_nonterminal
+    @n_b = @g.add_nonterminal
+
+    @n_s.add_production(['x', @n_a, 'y', @n_b, 'z'])
+    @n_a.add_production([])
+    @n_a.add_production(['a'])
+    @n_b.add_production([])
+    @n_b.add_production(['b'])
+  end
+
+  it "generates the sentence ['x', 'y', 'z'] first" do 
+    d = Panini::DerivationStrategy::Exhaustive.new(@g, 4)
+    d.sentence.should == ['x', 'y', 'z']
+  end
+
+  it "generates the sentence ['x', 'y', 'b', 'z'] next" do 
+    d = Panini::DerivationStrategy::Exhaustive.new(@g, 4)
+    d.sentence.should
+    d.sentence.should == ['x', 'y', 'b', 'z']
+  end
+
+  it "generates the sentence ['x', 'a', 'y', 'z'] next" do 
+    d = Panini::DerivationStrategy::Exhaustive.new(@g, 4)
+    d.sentence.should
+    d.sentence.should
+    d.sentence.should == ['x', 'a', 'y', 'z']
+  end
+
+end

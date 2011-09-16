@@ -10,6 +10,10 @@ class Array
     end
   end
 
+  def fully_derived?
+    not has_nonterminals?
+  end
+
 end
 
 
@@ -18,19 +22,20 @@ module Panini
 
     class Exhaustive < Base
 
-      def initialize(grammar)
+      def initialize(grammar, length_limit = nil)
         super(grammar)
         @in_progress_work = [].push([@grammar.start])
+        @length_limit = length_limit
       end
 
       # Generates a sentence. 
       def sentence
-        unless @in_progress_work.empty?
-          while @in_progress_work.top.has_nonterminals?
-            generate_work(@in_progress_work.pop)
-          end
-          @in_progress_work.pop
+        # unless @in_progress_work.empty?
+        while !@in_progress_work.empty? && @in_progress_work.top.has_nonterminals?
+          generate_work(@in_progress_work.pop)
         end
+        @in_progress_work.pop
+        # end
       end
 
       def generate_work(derived_sentence)
@@ -55,26 +60,22 @@ module Panini
               term
             end
           end
-          @in_progress_work.push(newly_derived_sentence)
+
+          # If we're limiting lengths see if completed derivations should
+          # be discarded.
+          unless (limiting_lengths? && newly_derived_sentence.fully_derived? && newly_derived_sentence.size > @length_limit)
+            @in_progress_work.push(newly_derived_sentence)
+          end
+
         end
 
       end
       private :generate_work
 
-      # 
-      # def substitution_pass(derived_sentence)
-      #   substituted = false
-      #   derived_sentence = derived_sentence.flat_map do |term|
-      #     if !substituted && (term.class == Nonterminal)
-      #       substituted = true
-      #       @production_proxies[term].production
-      #     else
-      #       term
-      #     end
-      #   end
-      #   return derived_sentence, substituted
-      # end
-      # private :substitution_pass
+      def limiting_lengths?
+        not @length_limit.nil?
+      end
+      private :limiting_lengths?
 
     end
 
