@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "panini"
-  s.version = "1.1.1"
+  s.version = "1.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["mjbellantoni"]
-  s.date = "2011-09-13"
+  s.date = "2011-09-16"
   s.description = "Panini allows you to generate sentences from a context-free grammar, also known as a CFG."
   s.email = "mjbellantoni@yahoo.com"
   s.extra_rdoc_files = [
