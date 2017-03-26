@@ -2,7 +2,7 @@ require "spec_helper"
 
 
 describe Panini::DerivationStrategy::RandomDampened do
-  it_behaves_like "basic derivation strategy"  
+  it_behaves_like "basic derivation strategy"
 end
 
 
@@ -15,11 +15,15 @@ describe Panini::DerivationStrategy::RandomDampened do
   end
 
   it "raises an exception if the damping factor is too small" do
-    lambda { described_class.new(@g, 1.0) }.should raise_error(ArgumentError, "The damping factor must be greater than 0.0 and less than 1.0.")
+    expect do
+      described_class.new(@g, 1.0)
+     end.to raise_error(ArgumentError, "The damping factor must be greater than 0.0 and less than 1.0.")
   end
 
   it "raises an exception if the damping factor is too large" do
-    lambda { described_class.new(@g, 0.0) }.should raise_error(ArgumentError, "The damping factor must be greater than 0.0 and less than 1.0.")
+    expect do
+      described_class.new(@g, 0.0)
+    end.to raise_error(ArgumentError, "The damping factor must be greater than 0.0 and less than 1.0.")
   end
 
 end
@@ -59,32 +63,33 @@ describe Panini::DerivationStrategy::RandomDampened, "sentence with an arethmeti
       number.add_production([n])
     end
 
-    Kernel::stub(:rand).and_return(0.3)
+    allow(Kernel).to receive(:rand).and_return(0.3)
   end
 
   context "with very little damping" do
 
     before(:each) do
-      @deriver = described_class.new(@grammar, 0.999999999999)      
+      @deriver = described_class.new(@grammar, 0.999999999999)
     end
 
     it "encounters a stack error" do
-      lambda { @deriver.sentence }.should raise_error(SystemStackError)
+      expect do
+        @deriver.sentence
+      end.to raise_error(SystemStackError)
     end
- 
+
   end
 
   context "with damping" do
 
     before(:each) do
-      @deriver = described_class.new(@grammar)      
+      @deriver = described_class.new(@grammar)
     end
 
     it "returns an expected sentence" do
-      @deriver.sentence.should == ["h", "*", "h", "/", "h", "/", "h", "+", "h", "*", "h", "/", "h", "/", "h"]
+      expect(@deriver.sentence).to eq(["h", "*", "h", "/", "h", "/", "h", "+", "h", "*", "h", "/", "h", "/", "h"])
     end
 
   end
-
 
 end

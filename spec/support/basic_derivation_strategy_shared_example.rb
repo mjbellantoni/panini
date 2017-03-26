@@ -14,9 +14,9 @@ shared_examples_for "basic derivation strategy" do
       @n.add_production([])
     end
 
-    it "generates an empty sentence" do 
+    it "generates an empty sentence" do
       d = described_class.new(@g)
-      d.sentence.should be_empty
+      expect(d.sentence).to be_empty
     end
 
   end
@@ -30,9 +30,9 @@ shared_examples_for "basic derivation strategy" do
       @n.add_production(['a'])
     end
 
-    it "generates the sentence ['a']" do 
+    it "generates the sentence ['a']" do
       d = described_class.new(@g)
-      d.sentence.should == ['a']
+      expect(d.sentence).to eq(['a'])
     end
 
   end
@@ -51,9 +51,9 @@ shared_examples_for "basic derivation strategy" do
       @n_a.add_production(['a'])
     end
 
-    it "generates the sentence ['a']" do 
+    it "generates the sentence ['a']" do
       d = described_class.new(@g)
-      d.sentence.should == ['a']
+      expect(d.sentence).to eq(['a'])
     end
 
   end
@@ -74,9 +74,9 @@ shared_examples_for "basic derivation strategy" do
       @n_b.add_production(['b'])
     end
 
-    it "generates the sentence ['a', 'b']" do 
+    it "generates the sentence ['a', 'b']" do
       d = described_class.new(@g)
-      d.sentence.should == ['a', 'b']
+      expect(d.sentence).to eq(['a', 'b'])
     end
 
   end

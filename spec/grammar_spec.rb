@@ -8,15 +8,15 @@ describe "Grammar" do
   end
 
   it "responds to #add_nonterminal" do
-    @g.should respond_to(:add_nonterminal)
+    expect(@g).to respond_to(:add_nonterminal)
   end
 
   it "responds to #nonterminals" do
-    @g.should respond_to(:nonterminals)
+    expect(@g).to respond_to(:nonterminals)
   end
 
   it "responds to #start" do
-    @g.should respond_to(:start)
+    expect(@g).to respond_to(:start)
   end
 
 end
@@ -31,12 +31,12 @@ describe "Grammar#add_nonterminal" do
   end
 
   it "returns a new Panini::Nonterminal" do
-    @n.should be_an_instance_of(Panini::Nonterminal)
+    expect(@n).to be_an_instance_of(Panini::Nonterminal)
   end
 
   it "stores the new Panini::Nonterminal" do
-    @g.nonterminals.should have(1).item
-    @g.nonterminals[0].should == @n
+    expect(@g.nonterminals.count).to eq(1)
+    expect(@g.nonterminals[0]).to eq(@n)
   end
 
 end
@@ -54,8 +54,8 @@ describe "Grammar#start" do
 
   context "when a start symbol is not specified" do
     it "returns the first nonterminal" do
-      @g.start.should == @nonterminals[0]
-    end    
+      expect(@g.start).to eq(@nonterminals[0])
+    end
   end
 
   context "when a start symbol is specified" do
@@ -63,8 +63,8 @@ describe "Grammar#start" do
       @g.start = @nonterminals[1]
     end
     it "returns that nonterminal" do
-      @g.start.should == @nonterminals[1]
-    end    
+      expect(@g.start).to eq(@nonterminals[1])
+    end
   end
 
 end
