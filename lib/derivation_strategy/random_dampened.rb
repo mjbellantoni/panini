@@ -13,7 +13,7 @@ module Panini
         end
       end
 
-      def initialize_copy(source)  
+      def initialize_copy(source)
         super
         @production_counts = @production_counts.map do |production_count|
           production_count
@@ -82,7 +82,7 @@ module Panini
       end
       private :build_production_proxies
 
-      # Generates a sentence. 
+      # Generates a sentence.
       def sentence
         substitute_nonterminal(@grammar.start, @production_proxies, 0)
       end
@@ -93,11 +93,11 @@ module Panini
         #  production_proxies_copy = production_proxies.each do |key, value|
         #    production_proxies_copy[key] = value.dup
         #  end
-        #  
-        production_proxies_copy = production_proxies.map do |value|
+        #
+        production_proxies_copy = production_proxies.update_values do |value|
           value.dup
         end
-        
+
         production_proxies_copy[nonterminal].production.flat_map do |term|
           if (term.class == Nonterminal)
             substitute_nonterminal(term, production_proxies_copy, depth + 1)
