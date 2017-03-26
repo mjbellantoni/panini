@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.authors = ["mjbellantoni"]
   s.date = "2011-09-16"
   s.description = "Panini allows you to generate sentences from a context-free grammar, also known as a CFG."
-  s.email = "mjbellantoni@yahoo.com"
+  s.email = "mjbellantoni@gmail.com"
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.rdoc"

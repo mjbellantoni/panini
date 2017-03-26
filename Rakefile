@@ -19,7 +19,7 @@ Jeweler::Tasks.new do |gem|
   gem.license = "MIT"
   gem.summary = %Q{Create sentences from a context-free grammar (CFG)}
   gem.description = %Q{Panini allows you to generate sentences from a context-free grammar, also known as a CFG.}
-  gem.email = "mjbellantoni@yahoo.com"
+  gem.email = "mjbellantoni@gmail.com"
   gem.authors = ["mjbellantoni"]
   # dependencies defined in Gemfile
 end
